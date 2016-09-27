@@ -43,8 +43,10 @@ public class Computer_GUI extends JFrame implements ActionListener {
 	private static JTextArea terminal;
 	private static JButton cont, start, microstep, macrostep, runinput, enter,
 			load, set_reg_mem, get_reg_mem, show_hide_dev;
-	private JRadioButton[] MAR, MSR, MFR, MDR;
-	private JLabel lblMsr, lblMar, lblMfr, lblMdr;
+	private JRadioButton[] MAR, MSR,MDR;
+	//private JRadioButton[] MFR;
+	private JLabel lblMsr, lblMar,lblMdr;
+	//private JLabel lblMfr;
 	private Boolean show_hide = true;
 	private JComboBox register_list;
 	private SpinnerNumberModel bit_value;
@@ -66,14 +68,14 @@ public class Computer_GUI extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		setBounds(100, 100, 1049, 547);
-		contentPane.setBackground(SystemColor.menu);
+		contentPane.setBackground(Color.WHITE);
 		setContentPane(contentPane);
 		init_exec_command_map();
 
 		// Registers for getting and setting register and memory
 		String[] registers = { "Select Register/Memory", "Memory", "R0", "R1",
 				"R2", "R3", "X1", "X2", "X3", "PC", "IR", "CC", "MAR", "MDR",
-				"MSR", "MFR", "OPCODE", "I", "R", "IX", "ADDR", "EA", "OP1",
+				"MSR", /*"MFR",*/ "OPCODE", "I", "R", "IX", "ADDR", "EA", "OP1",
 				"OP2", "OP3", "OP4", "RESULT", "RESULT2", "RX", "RY", "AL",
 				"LR", "COUNT" };
 		contentPane
@@ -167,14 +169,14 @@ public class Computer_GUI extends JFrame implements ActionListener {
 		lblMdr = new JLabel("MDR:");
 		contentPane.add(lblMdr, "cell 3 3 3 1,alignx right,growy");
 
-		lblMfr = new JLabel("MFR:");
-		contentPane.add(lblMfr, "cell 3 4 3 1,alignx right,growy");
+		/*lblMfr = new JLabel("MFR:");
+		contentPane.add(lblMfr, "cell 3 4 3 1,alignx right,growy");*/
 
 		JLabel lblCc = new JLabel("CC:");
-		contentPane.add(lblCc, "cell 3 5 3 1,alignx right,growy");
+		contentPane.add(lblCc, "cell 3 4 3 1,alignx right,growy");
 
 		JLabel lblIr = new JLabel("OPCODE:");
-		contentPane.add(lblIr, "cell 3 6 3 1,alignx right,aligny center");
+		contentPane.add(lblIr, "cell 3 5 3 1,alignx right,aligny center");
 
 		/*
 		 * Jpanel for Setting Registers and Memory - Spinner: memory_address -
@@ -184,13 +186,13 @@ public class Computer_GUI extends JFrame implements ActionListener {
 		 * registers/memory
 		 */
 		panel = new JPanel();
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(Color.red);
 		contentPane.add(panel, "cell 5 8 2 5,grow");
 		panel.setLayout(new MigLayout("",
 				"[50:n:50px][50px:n,center][150:n][][150px:n:150px,center][]",
 				"[][][]"));
 
-		JLabel lblSetMemoryAnd = new JLabel("Set/Get Memory and Registers");
+		JLabel lblSetMemoryAnd = new JLabel("Set or Get Memory and Registers");
 		panel.add(lblSetMemoryAnd, "cell 0 0");
 
 		JLabel lblSet = new JLabel("Set - ");
@@ -247,9 +249,9 @@ public class Computer_GUI extends JFrame implements ActionListener {
 		MAR = new JRadioButton[18];
 		MSR = new JRadioButton[18];
 		MDR = new JRadioButton[18];
-		MFR = new JRadioButton[4];
+		//MFR = new JRadioButton[4];
 		JRadioButton[] CC = new JRadioButton[4];
-		JRadioButton[][] MR = { PC, MAR, MSR, MDR, MFR, CC };
+		JRadioButton[][] MR = { PC, MAR, MSR, MDR,CC };
 
 		// For loop to decrease RadioButton [] creation
 		for (int j = 0; j < MR.length; j++) {
@@ -309,10 +311,10 @@ public class Computer_GUI extends JFrame implements ActionListener {
 		Registers.put("PC", PC);
 		Registers.put("MSR", MSR);
 		Registers.put("MDR", MDR);
-		Registers.put("MFR", MFR);
+		//Registers.put("MFR", MFR);
 		Registers.put("MAR", MAR);
 		Registers.put("IR", IR);
-		Registers.put("CC", CC);
+		//Registers.put("CC", CC);
 
 		// Action Listeners for complex logic
 		register_list.addActionListener(new ActionListener() {
@@ -424,7 +426,7 @@ public class Computer_GUI extends JFrame implements ActionListener {
 				show_hide = !show_hide;
 				for (int i = 0; i < MAR.length; i++) {
 					if (i < 4) {
-						MFR[i].setVisible(show_hide);
+						//MFR[i].setVisible(show_hide);
 					}
 					MAR[i].setVisible(show_hide);
 					MDR[i].setVisible(show_hide);
@@ -433,7 +435,7 @@ public class Computer_GUI extends JFrame implements ActionListener {
 				lblMar.setVisible(show_hide);
 				lblMsr.setVisible(show_hide);
 				lblMdr.setVisible(show_hide);
-				lblMfr.setVisible(show_hide);
+				//lblMfr.setVisible(show_hide);
 				panel.setVisible(show_hide);
 				String show_or_hide = show_hide ? "Hide Developers Console"
 						: "Show Developers Console";

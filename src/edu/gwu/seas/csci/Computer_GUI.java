@@ -269,7 +269,7 @@ public class Computer_GUI extends JFrame implements ActionListener {
 					contentPane.add(XR[j][i], location);
 				}
 				if (j == MR.length - 1 || j == MR.length - 2) {
-					if (i < MFR.length || i < CC.length) {
+					if (/*i < MFR.length ||*/ i < CC.length) {
 						MR[j][i] = new JRadioButton();
 						MR[j][i].setEnabled(false);
 						String location = "cell 6 " + (j);
